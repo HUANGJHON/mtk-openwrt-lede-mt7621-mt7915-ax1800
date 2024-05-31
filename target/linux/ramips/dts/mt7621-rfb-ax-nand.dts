@@ -7,8 +7,29 @@
 	compatible = "mediatek,mt7621-rfb-ax-nand", "mediatek,mt7621-soc";
 	model = "MediaTek MT7621 RFB (802.11ax,NAND)";
 
+	aliases {
+		led-boot = &led_status_red;
+		led-failsafe = &led_status_red;
+		led-running = &led_status_green;
+		led-upgrade = &led_status_red;
+		label-mac-device = &gmac0;
+	};
 	chosen {
 		bootargs = "console=ttyS0,115200";
+	};
+
+        gpio-leds-polled {
+		compatible = "gpio-leds-polled";
+
+		led_status_red: sys_red {
+                        label = "red:status";
+                        gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
+                };
+
+                led_status_green: sys_green {
+                        label = "green:status";
+                        gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
+                };
 	};
 
 	gpio-keys-polled {
